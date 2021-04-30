@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=
-HISTFILESIZE=
+HISTSIZE=""
+HISTFILESIZE=""
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -82,6 +82,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+
+    alias findf='find -type f -printf "%f\n"'
 fi
 
 # colored GCC warnings and errors
@@ -91,6 +93,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ls="ls -l"
 alias emacs="emacs -nw"
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -119,9 +122,15 @@ fi
 
 
 export ANT_OPTS="-Xmx1024m -XX:MaxPermSize=512m"
-export JAVA_HOME=/usr/lib/jvm/java-7-oracle
-export JAVA8=~/Programs/jdk1.8.0_101/
-
+export JAVA8=/usr/lib/jvm/jdk1.8.0_221/
+export JAVA11=/usr/lib/jvm/jdk-11/
+export JAVA_HOME=${JAVA11}
+export NODE_PATH=/opt/node-v10.16.3-linux-x64
 export SVN_EDITOR=emacs
 
-export linuxslave=builduser@ixiasoft.local@172.20.30.166
+#function svnmeld{ svn diff –diff-cmd=’meld’ $1 $2 }
+
+export PATH=$PATH:/opt/selenium-drivers/:${NODE_PATH}/bin/:$JAVA_HOME/bin/
+export TEST_SERVICE_CONFIG_DIRECTORY=selenium.development
+
+complete -C /usr/bin/terraform terraform
